@@ -10,14 +10,18 @@ client.connect(err => {
     // perform actions on the collection object
     client.close();
 });
-
-const port = 80;
+app.use(express.static('views'))
+const port = 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/code', (req, res) => {
     console.log(req.body.code);
     res.send("okay")
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + './views/index.html'));
 });
 
 app.listen(port, () => {
