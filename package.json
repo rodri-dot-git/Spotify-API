@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/rodri-dot-git/electron-backend/issues"
   },
-  "homepage": "https://github.com/rodri-dot-git/electron-backend#readme"
+  "homepage": "https://github.com/rodri-dot-git/electron-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
 }
