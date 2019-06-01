@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 //     // perform actions on the collection object
 //     client.close();
 // });
-app.use(express.static('views');
+app.use(express.static('views'));
 
 app.use(bodyParser.urlencoded({
     extended: true
