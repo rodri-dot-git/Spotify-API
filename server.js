@@ -40,6 +40,6 @@ app.get('/login', function (req, res) {
         '&redirect_uri=' + encodeURIComponent(redirect_uri));
 });
 
-app.get('/callback:code', (req, res) => {
+app.get('/callback', (req, res) => {
     console.log(req.query.code);
 })
