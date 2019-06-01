@@ -41,5 +41,5 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/callback:code', (req, res) => {
-    console.log(req.body);
+    console.log(req.query.code);
 })
