@@ -12,8 +12,7 @@ const bodyParser = require('body-parser');
 //     // perform actions on the collection object
 //     client.close();
 // });
-app.use(express.static('views'))
-const port = 8080;
+app.use(express.static('views');
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -25,15 +24,15 @@ app.post('/code', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + './views/index.html'));
+    res.sendFile(path.join(__dirname + 'views\index.html'));
 });
 
-app.listen(port, () => {
-    console.log('We are live on ' + port);
+app.listen(process.env.PORT || 4000, () => {
+    console.log('We are live on ' + process.env.PORT);
 });
 
 var my_client_id = '010fde68a6df41048c87cc0855a2f5ce';
-var redirect_uri = 
+var redirect_uri = 'h';
 
 app.get('/login', function (req, res) {
     var scopes = 'user-read-private user-read-email';
