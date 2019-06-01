@@ -27,6 +27,7 @@ var redirect_uri = 'http://warm-lowlands-59615.herokuapp.com/callback';
 
 app.get('/login', function (req, res) {
     var scopes = 'user-read-private user-read-email';
+    res.send(auth !== '');
     res.redirect('https://accounts.spotify.com/authorize' +
         '?response_type=code' +
         '&client_id=' + my_client_id +
