@@ -2,18 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-var auth;
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://rodridlc:Mauricio10@cluster0-gitot.azure.mongodb.net/spotify?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+    useNewUrlParser: true
+});
 
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://rodridlc:Mauricio10@cluster0-gitot.azure.mongodb.net/spotify?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, {
-//     useNewUrlParser: true
-// });
-// client.connect(err => {
-//     const collection = client.db("spotify").collection("users");
-//     // perform actions on the collection object
-//     client.close();
-// });
 app.use(express.static('views'));
 
 app.use(bodyParser.urlencoded({
@@ -39,7 +33,11 @@ app.get('/login', function (req, res) {
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
         '&redirect_uri=' + encodeURIComponent(redirect_uri));
 });
-
+var auth = '';
 app.get('/callback', (req, res) => {
-    console.log(req.query.code);
+    auth = req.query.code;
+})
+
+app.get('/auth', (req, res) => {
+    res.send(auth);
 })
