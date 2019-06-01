@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+var auth;
+
 // const MongoClient = require('mongodb').MongoClient;
 // const uri = "mongodb+srv://rodridlc:Mauricio10@cluster0-gitot.azure.mongodb.net/spotify?retryWrites=true&w=majority";
 // const client = new MongoClient(uri, {
@@ -18,11 +20,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.post('/code', (req, res) => {
-    console.log(req.body.code);
-    res.send("okay")
-});
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + 'views\index.html'));
 });
@@ -32,7 +29,7 @@ app.listen(process.env.PORT || 4000, () => {
 });
 
 var my_client_id = '010fde68a6df41048c87cc0855a2f5ce';
-var redirect_uri = 'h';
+var redirect_uri = 'http://warm-lowlands-59615.herokuapp.com/callback';
 
 app.get('/login', function (req, res) {
     var scopes = 'user-read-private user-read-email';
@@ -42,3 +39,7 @@ app.get('/login', function (req, res) {
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
         '&redirect_uri=' + encodeURIComponent(redirect_uri));
 });
+
+app.get('/callback', (req, res) => {
+    console.log(req.body);
+})
