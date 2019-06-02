@@ -43,6 +43,7 @@ app.get('/login', function (req, res) {
 app.get('/callback', async (req, res) => {
     await set(req.params.code)
     console.log(auth);
+    res.sendFile(path.join(__dirname + 'views\login.html'));
 })
 
 function set (sAuth){
@@ -51,5 +52,4 @@ function set (sAuth){
 
 app.get('/auth', (req, res) => {
     res.send(auth);
-    res.sendFile(path.join(__dirname + 'views\login.html'));
 })
