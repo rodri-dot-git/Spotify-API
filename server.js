@@ -35,9 +35,14 @@ app.get('/login', async function (req, res) {
     res.send(auth !== '');
 });
 var auth = '';
-app.get('/callback', (req, res) => {
-    auth = req.query.code;
+app.get('/callback', async (req, res) => {
+    await set(req.params.code)
+    console.log(auth);
 })
+
+function set (sAuth){
+    auth = sAuth;
+}
 
 app.get('/auth', (req, res) => {
     res.send(auth);
