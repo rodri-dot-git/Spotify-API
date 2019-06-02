@@ -41,5 +41,5 @@ app.get('/callback', (req, res) => {
 
 app.get('/auth', (req, res) => {
     res.send(auth);
-    res.sendFile(path.join(__dirname + 'views\index.html'));
+    res.sendFile(path.join(__dirname + 'views\login.html'));
 })
