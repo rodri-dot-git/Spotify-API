@@ -26,7 +26,7 @@ var my_client_id = '010fde68a6df41048c87cc0855a2f5ce';
 var redirect_uri = 'http://warm-lowlands-59615.herokuapp.com/callback';
 
 app.get('/login', async function (req, res) {
-    var scopes = 'user-read-private user-read-email user-read-recently-played user-top-read streaming';
+    var scopes = 'user-read-private user-read-email user-read-birthdate user-read-recently-played user-top-read streaming';
     await res.redirect('https://accounts.spotify.com/authorize' +
         '?response_type=code' +
         '&client_id=' + my_client_id +
