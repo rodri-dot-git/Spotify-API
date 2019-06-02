@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const SpotifyWebApi = require('spotify-web-api-node');
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://rodridlc:Mauricio10@cluster0-gitot.azure.mongodb.net/spotify?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
     useNewUrlParser: true
 });
+
+var auth = '';
 
 app.use(express.static('views'));
 
@@ -22,24 +24,22 @@ app.listen(process.env.PORT || 4000, () => {
     console.log('We are live on ' + process.env.PORT);
 });
 
-var my_client_id = '010fde68a6df41048c87cc0855a2f5ce';
-var redirect_uri = 'http://warm-lowlands-59615.herokuapp.com/callback';
-
 app.get('/login', function (req, res) {
-    var scopes = 'user-read-private user-read-email user-read-birthdate user-read-recently-played user-top-read streaming';
-    res.redirect('https://accounts.spotify.com/authorize' +
-        '?response_type=code' +
-        '&client_id=' + my_client_id +
-        (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-        '&redirect_uri=' + encodeURIComponent(redirect_uri));
-        console.log('https://accounts.spotify.com/authorize' +
-            '?response_type=code' +
-            '&client_id=' + my_client_id +
-            (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-            '&redirect_uri=' + encodeURIComponent(redirect_uri));
-    //res.send(auth !== '');
+    var scopes = ['user-read-private', 'user-read-email', 'user-read-birthdate', 'user-read-recently-played', 'user-top-read', 'streaming'],
+        redirectUri = 'http://warm-lowlands-59615.herokuapp.com/callback',
+        clientId = '010fde68a6df41048c87cc0855a2f5ce',
+        state = 'a-state';
+
+    // Setting credentials can be done in the wrapper's constructor, or using the API object's setters.
+    var spotifyApi = new SpotifyWebApi({
+        redirectUri: redirectUri,
+        clientId: clientId
+    });
+
+    // Create the authorization URL
+    res.send(spotifyApi.createAuthorizeURL(scopes, state));
 });
-var auth = '';
+
 app.get('/callback', async (req, res) => {
     await set(req.params.code)
     console.log(auth);
