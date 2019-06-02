@@ -25,13 +25,18 @@ app.listen(process.env.PORT || 4000, () => {
 var my_client_id = '010fde68a6df41048c87cc0855a2f5ce';
 var redirect_uri = 'http://warm-lowlands-59615.herokuapp.com/callback';
 
-app.get('/login', async function (req, res) {
+app.get('/login', function (req, res) {
     var scopes = 'user-read-private user-read-email user-read-birthdate user-read-recently-played user-top-read streaming';
     res.redirect('https://accounts.spotify.com/authorize' +
         '?response_type=code' +
         '&client_id=' + my_client_id +
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
         '&redirect_uri=' + encodeURIComponent(redirect_uri));
+        console.log('https://accounts.spotify.com/authorize' +
+            '?response_type=code' +
+            '&client_id=' + my_client_id +
+            (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+            '&redirect_uri=' + encodeURIComponent(redirect_uri));
     //res.send(auth !== '');
 });
 var auth = '';
