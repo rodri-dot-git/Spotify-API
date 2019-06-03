@@ -43,14 +43,12 @@ app.get('/callback', (req, res) => {
                 console.log('The access token is ' + data.body['access_token']);
                 console.log('The refresh token is ' + data.body['refresh_token']);
 
-                // Set the access token on the API object to use it in later calls
-                spotifyApi.setAccessToken(data.body['access_token']);
-                spotifyApi.setRefreshToken(data.body['refresh_token']);
+                res.sendFile(path.join(__dirname + 'views\login.html'));
             },
             function (err) {
                 console.log('Something went wrong!', err);
-            };
-    res.sendFile(path.join(__dirname + 'views\login.html'));
+            }
+    
 })
 
 function set (sAuth){
