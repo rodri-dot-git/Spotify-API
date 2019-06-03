@@ -31,7 +31,7 @@ app.get('/login', function (req, res) {
         state = 'a-state';
     var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state, true);
     console.log(authorizeURL)
-    res.send(authorizeURL);
+    res.redirect(authorizeURL);
 });
 
 app.get('/callback', (req, res) => {
