@@ -37,7 +37,7 @@ app.get('/login', function (req, res) {
 app.get('/callback', (req, res) => {
     var authorizationCode = req.query.code;
 
-    spotifyApi.authorizationCodeGrant('AQDOi253QEyExGIG4MP8axrePWsK8aJWf7rIbhaI3wP69ewCtXqz31DXgr5eiF-TltBnujKzMvsU2Mg_pKuWw3ooVA6sEe0a3NSNATG6xEckR76vVZuNuAIapcnwDKlilcOq-AA_MLkFUJ38cvndwizKmqeyXC9igBnRpPGXHRRXATISI9AWzpoiUHOOE2O8YrU6AQdxLMvhOXQdzYfYBfGj4_2ukvpi8s-2jrvcXlB_U2h4j31wdupYCDvbaf4x1P3-YWeSNRfJalMjrAvx1LHLOlUz7MNQid_79-uElPjgGXQ-v1bGZ9e4d9Q9XLDqKsuxeWn0QLx_o0ZBVdyVBzrGT7Xa1crdGzmwdtRw1L3jBcZaWEBg').then(
+    spotifyApi.authorizationCodeGrant(authorizationCode).then(
         function (data) {
             console.log('The token expires in ' + data.body['expires_in']);
             console.log('The access token is ' + data.body['access_token']);
