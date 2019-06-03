@@ -39,7 +39,7 @@ app.get('/callback', (req, res) => {
 
     spotifyApi.authorizationCodeGrant(authorizationCode)
         .then(function (data) {
-            set(data.body['access_token']);
+            //set(data.body['access_token']);
             console.log(data);
         }, function (err) {
             console.log('Something went wrong when retrieving the access token!', err.message);
