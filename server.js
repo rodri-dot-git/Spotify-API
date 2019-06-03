@@ -35,11 +35,12 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/callback', (req, res) => {
-    setTimeout(() => {
-        console.log(req.query.code);
-        set(req.query.code);
-        res.sendFile(path.join(__dirname + 'views\login.html'));
-    }, 3000);
+    // setTimeout(() => {
+    //     console.log(req.query.code);
+    //     set(req.query.code);
+    //     res.sendFile(path.join(__dirname + 'views\login.html'));
+    // }, 3000);
+    console.log('no crashea');
 })
 
 function set(sAuth) {
