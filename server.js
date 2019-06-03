@@ -2,11 +2,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://rodridlc:Mauricio10@cluster0-gitot.azure.mongodb.net/spotify?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-    useNewUrlParser: true
-});
 
 var auth = '';
 
@@ -34,9 +29,9 @@ var spotifyApi = new SpotifyWebApi({
 app.get('/login', function (req, res) {
     var scopes = ['user-read-private', 'user-read-email', 'user-read-birthdate', 'user-read-recently-played', 'user-top-read', 'streaming'],
         state = 'a-state';
-    var authorizeURL = spotifyApi.createAuthorizeURL(scopes, null, true);
+    var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state, true);
     console.log(authorizeURL)
-    response.send(authorizeURL);
+    //response.send(authorizeURL);
 });
 
 app.get('/callback', (req, res) => {
