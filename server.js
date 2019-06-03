@@ -47,6 +47,7 @@ function set(sAuth) {
 }
 
 app.get('/auth', (req, res) => {
+    console.log('auth');
     console.log(auth);
     res.send(auth);
 })
