@@ -35,7 +35,7 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/callback', (req, res) => {
-    var authorizationCode = request.query.code;
+    var authorizationCode = req.query.code;
 
     spotifyApi.authorizationCodeGrant(authorizationCode).then(
         function (data) {
