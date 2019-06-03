@@ -41,7 +41,7 @@ app.get('/callback', (req, res) => {
         .then(function (data) {
             set(data.body['access_token']);
             console.log(data)
-            response.redirect(`/#access_token=${data.body['access_token']}&refresh_token=${data.body['refresh_token']}`)
+            res.redirect(`/#access_token=${data.body['access_token']}&refresh_token=${data.body['refresh_token']}`)
         }, function (err) {
             console.log('Something went wrong when retrieving the access token!', err.message);
         });
