@@ -35,21 +35,10 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/callback', (req, res) => {
-    var authorizationCode = req.query.code;
     setTimeout(() => {
         console.log(req.query.code);
-        spotifyApi.authorizationCodeGrant(authorizationCode).then(
-            function (data) {
-                console.log('The token expires in ' + data.body['expires_in']);
-                console.log('The access token is ' + data.body['access_token']);
-                console.log('The refresh token is ' + data.body['refresh_token']);
-                set(data.body['access_token']);
-                res.sendFile(path.join(__dirname + 'views\login.html'));
-            },
-            function (err) {
-                console.log('Something went wrong!', err);
-            }
-        );
+        set(req.query.code);
+        res.sendFile(path.join(__dirname + 'views\login.html'));
     }, 3000);
 })
 
