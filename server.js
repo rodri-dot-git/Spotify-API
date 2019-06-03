@@ -24,25 +24,23 @@ app.listen(process.env.PORT || 4000, () => {
     console.log('We are live on ' + process.env.PORT);
 });
 
+var redirectUri = 'http://warm-lowlands-59615.herokuapp.com/callback',
+    clientId = '010fde68a6df41048c87cc0855a2f5ce';
+var spotifyApi = new SpotifyWebApi({
+    redirectUri: redirectUri,
+    clientId: clientId
+});
+
 app.get('/login', function (req, res) {
     var scopes = ['user-read-private', 'user-read-email', 'user-read-birthdate', 'user-read-recently-played', 'user-top-read', 'streaming'],
-        redirectUri = 'http://warm-lowlands-59615.herokuapp.com/callback',
-        clientId = '010fde68a6df41048c87cc0855a2f5ce',
         state = 'a-state';
-
-    // Setting credentials can be done in the wrapper's constructor, or using the API object's setters.
-    var spotifyApi = new SpotifyWebApi({
-        redirectUri: redirectUri,
-        clientId: clientId
-    });
-
     // Create the authorization URL
     res.send(spotifyApi.createAuthorizeURL(scopes, state));
 });
 
 app.get('/callback', async (req, res) => {
     await set(req.params.code)
-    console.log(auth);
+    console.log(req.params.code);
     res.sendFile(path.join(__dirname + 'views\login.html'));
 })
 
