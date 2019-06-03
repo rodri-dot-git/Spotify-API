@@ -35,8 +35,16 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/callback', (req, res) => {
-    set(req.query.code)
-    console.log(req.query.code);
+    var authorizationCode = request.query.code;
+
+    spotifyApi.authorizationCodeGrant(authorizationCode)
+        .then(function (data) {
+            set(data.body['access_token']);
+            console.log(data)
+            response.redirect(`/#access_token=${data.body['access_token']}&refresh_token=${data.body['refresh_token']}`)
+        }, function (err) {
+            console.log('Something went wrong when retrieving the access token!', err.message);
+        });
     res.sendFile(path.join(__dirname + 'views\login.html'));
 })
 
