@@ -34,14 +34,13 @@ var spotifyApi = new SpotifyWebApi({
 app.get('/login', function (req, res) {
     var scopes = ['user-read-private', 'user-read-email', 'user-read-birthdate', 'user-read-recently-played', 'user-top-read', 'streaming'],
         state = 'a-state';
-    // Create the authorization URL
     var authorizeURL = spotifyApi.createAuthorizeURL(scopes, null, true);
     console.log(authorizeURL)
     response.send(authorizeURL);
 });
 
-app.get('/callback', async (req, res) => {
-    await set(req.query.code)
+app.get('/callback', (req, res) => {
+    set(req.query.code)
     console.log(req.query.code);
     res.sendFile(path.join(__dirname + 'views\login.html'));
 })
