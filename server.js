@@ -27,7 +27,7 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 app.get('/login', function (req, res) {
-    var scopes = ['user-read-private', 'user-read-email', 'user-read-birthdate', 'user-read-recently-played', 'user-top-read', 'streaming'],
+    var scopes = ['user-read-private', 'user-read-email', 'user-read-birthdate', 'user-read-recently-played', 'user-top-read', 'streaming', 'playlist-read-private'],
         state = 'a-state';
     var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state, true);
     console.log(authorizeURL)
