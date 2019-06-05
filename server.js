@@ -22,9 +22,13 @@ server.listen(process.env.PORT || 4000, () => {
 });
 
 io.on('connection', (socket) => {
-    // when the client emits 'new message', this listens and executes
-    socket.on('newToken', (data) => {
-        // we tell the client to execute 'new message'
+    app.get('/callback', (req, res) => {
+        console.log(req.query.code);
+        set(req.query.code);
+        socket.broadcast.emit('newToken', token);
+        res.redirect('/loginC');
+    })
+    socket.on('newToken', () => {
         socket.broadcast.emit('TokenArrived');
     });
 });
@@ -47,12 +51,6 @@ app.get('/login', function (req, res) {
 app.get('/loginC', (req, res) => {
     res.sendFile(path.join(__dirname + '/views/login.html'));
 });
-app.get('/callback', (req, res) => {
-    console.log(req.query.code);
-    set(req.query.code);
-    socket.broadcast.emit('newToken', req.query.code);
-    res.redirect('/loginC');
-})
 
 function set(sAuth) {
     auth = sAuth;
