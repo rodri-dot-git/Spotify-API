@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', (req, res) => {
+    console.log(path.join(__dirname + './views/index.html'));
     res.sendFile(path.join(__dirname + './views/index.html'));
 });
 
