@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
     })
     console.log('connected')
     socket.on('conn', () => {
-        console.log('conn');
+        socket.broadcast.emit('test', 'un mensaje');
     })
 });
 
