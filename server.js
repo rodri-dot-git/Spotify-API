@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
-
+var path = require('path');
 var auth = '';
 
 app.use(express.static('views'));
