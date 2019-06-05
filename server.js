@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + 'views\index.html'));
+    res.sendFile(path.join(__dirname + './views/index.html'));
 });
 
 app.listen(process.env.PORT || 4000, () => {
@@ -35,7 +35,7 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/loginC', (req, res) => {
-    res.sendFile(path.join(__dirname + 'views\login.html'));
+    res.sendFile(path.join(__dirname + './views/login.html'));
 }); 
 app.get('/callback', (req, res) => {
     console.log(req.query.code);
