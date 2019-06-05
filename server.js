@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
     app.get('/callback', (req, res) => {
         console.log(req.query.code);
         set(req.query.code);
-        socket.broadcast.emit('TokenArrived');
+        socket.broadcast.emit('TokenArrived', req.query.code);
         res.redirect('/loginC');
     })
     console.log('connected')
