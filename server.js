@@ -29,6 +29,9 @@ io.on('connection', (socket) => {
         res.redirect('/loginC');
     })
     console.log('connected')
+    socket.on('conn', () => {
+        console.log('conn');
+    })
 });
 
 var redirectUri = 'http://warm-lowlands-59615.herokuapp.com/callback',
