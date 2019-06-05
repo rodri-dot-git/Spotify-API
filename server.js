@@ -25,12 +25,10 @@ io.on('connection', (socket) => {
     app.get('/callback', (req, res) => {
         console.log(req.query.code);
         set(req.query.code);
-        socket.broadcast.emit('newToken');
+        socket.broadcast.emit('TokenArrived');
         res.redirect('/loginC');
     })
-    socket.on('newToken', () => {
-        socket.broadcast.emit('TokenArrived');
-    });
+    console.log('connected')
 });
 
 var redirectUri = 'http://warm-lowlands-59615.herokuapp.com/callback',
