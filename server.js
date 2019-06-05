@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+var server = require('http').createServer(app);
 const bodyParser = require('body-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 var path = require('path');
@@ -15,8 +16,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '.views/index.html'));
 });
 
-app.listen(process.env.PORT || 4000, () => {
+server.listen(process.env.PORT || 4000, () => {
     console.log('We are live on ' + process.env.PORT);
+});
+
+io.on('connection', (socket) => {
+    // when the client emits 'new message', this listens and executes
+    socket.on('newToken', (data) => {
+        // we tell the client to execute 'new message'
+        socket.broadcast.emit('TokenArrived');
+    });
 });
 
 var redirectUri = 'http://warm-lowlands-59615.herokuapp.com/callback',
@@ -36,10 +45,11 @@ app.get('/login', function (req, res) {
 
 app.get('/loginC', (req, res) => {
     res.sendFile(path.join(__dirname + '/views/login.html'));
-}); 
+});
 app.get('/callback', (req, res) => {
     console.log(req.query.code);
     set(req.query.code);
+    socket.broadcast.emit('newToken', req.query.code);
     res.redirect('/loginC');
 })
 
