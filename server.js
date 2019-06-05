@@ -34,18 +34,13 @@ app.get('/login', function (req, res) {
     res.redirect(authorizeURL);
 });
 
-app.get('/loginC', function (req, res) {
-    var scopes = ['user-read-private', 'user-read-email', 'user-read-birthdate', 'user-read-recently-played', 'user-top-read', 'playlist-read-private'],
-        state = 'a-state';
-    var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state, true);
-    console.log(authorizeURL)
-    res.redirect(authorizeURL);
-});
-
+app.get('/loginC', (req, res) => {
+    res.sendFile(path.join(__dirname + 'views\login.html'));
+}); 
 app.get('/callback', (req, res) => {
     console.log(req.query.code);
     set(req.query.code);
-    res.render('./views/login.html');
+    res.redirect('/loginC');
 })
 
 function set(sAuth) {
