@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 var path = require('path');
 var auth = '';
+var io = require('../..')(server);
 
 app.use(express.static('views'));
 
